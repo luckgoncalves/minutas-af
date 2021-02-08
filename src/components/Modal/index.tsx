@@ -42,6 +42,7 @@ do documento original.</p>
         </ModalBody>
         <ModalFooter className="d-flex justify-content-center align-items-center">
           <Button
+            outlined={false}
             onClick={toggle}
             text={'Ok, entendi'}
             loading={false}
