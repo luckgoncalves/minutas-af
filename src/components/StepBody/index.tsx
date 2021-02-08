@@ -10,7 +10,7 @@ interface Steps {
 const StepBody: React.FC<Steps> = ({children, active}) => {
   
   return (
-    <Container display={active ? true : false} >
+    <Container display={active ? true.toString() : false.toString()} >
       {children}
     </Container>
   );

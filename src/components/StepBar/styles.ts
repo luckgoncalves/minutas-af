@@ -22,7 +22,7 @@ export const Step = styled.div`
   cursor: pointer;
 `;
 
-export const Badge = styled.div<{ active: boolean }>`
+export const Badge = styled.div<{ active: String }>`
   width: 24px;
   height: 24px;
   
@@ -31,7 +31,7 @@ export const Badge = styled.div<{ active: boolean }>`
   padding: 3px 2px;
 
   color: #fff;
-  background-color: ${props => props.active ? '#0cb969' : '#808080'};
+  background-color: ${props => props.active === 'true' ? '#0cb969' : '#808080'};
 
   display: flex;
   align-items: center;

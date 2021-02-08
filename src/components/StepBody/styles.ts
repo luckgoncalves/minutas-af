@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 
-export const Container = styled.div<{ display: Boolean }>`
+export const Container = styled.div<{ display: String }>`
 
 
-  display: ${props => props.display ? 'flex' : 'none'};
+  display: ${props => props.display==='true' ? 'flex' : 'none'};
  
   width: 914px;
   /* height: 366px; */
