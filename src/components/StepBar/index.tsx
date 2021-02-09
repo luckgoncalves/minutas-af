@@ -7,6 +7,8 @@ import Button from '../Button'
 import { Steps, Badge, Step, Separator, Form, GroupButtons } from './styles';
 import { AuthContext } from '../../providers/auth';
 
+import { typeForm, fields } from './actions';
+
 const StepBar: React.FC = () => {
 
   const { loading, setLoading } = useContext(AuthContext)
@@ -14,39 +16,22 @@ const StepBar: React.FC = () => {
   const [ active, setActive ] = useState(1)
 
 
-  const Body = () => {
-
+  const Body = (payment) => {
+    payment = 'Depósito na Conta do Advogado';
 
     return (
       <Form>
         <span>Pedimos, por gentileza, preencher as informações para o escritório confeccionar a minuta. No caso o pagamento dar-se-á através de depósito em conta corrente da PARTE AUTORA. </span>
-       
-        <fieldset>
-          <label htmlFor="">Qual o nome do beneficiário?</label>
-          <input type="text" name="" id="" placeholder="nome parte autora"/>
-        </fieldset>
+      
+       {typeForm()
+          .filter( form => form.payment.toLowerCase() === payment.toLowerCase() )
+          .map( ({ inputs } ) => 
+            inputs.map( input => 
+              fields[input.id](input)
+            )
+          )
+        }
 
-        <fieldset>
-          <label htmlFor="">Qual o CPF/CNPJ do beneficiário?</label>
-          <input type="text" name="" id="" placeholder="CPF/CNPJ parte autora"/>
-        </fieldset>
-
-        <fieldset>
-          <label htmlFor="">Qual o banco para depósito?</label>
-          <select name="" id="">
-            <option>Selecionar banco da parte autora</option>
-          </select>
-        </fieldset>
-
-        <fieldset>
-          <label htmlFor="">Qual a agência?</label>
-          <input type="text" name="" id="" placeholder="Agência da parte autora"/>
-        </fieldset>
-
-        <fieldset>
-          <label htmlFor="">Qual a conta?</label>
-          <input type="text" name="" id="" placeholder="Conta da parte autora"/>
-        </fieldset>
         <span>Clique a baixo para gerar e assinar a sua minuta e após o envio o escritório realizará o protocolo em até 24 horas.</span>
 
         <GroupButtons>

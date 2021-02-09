@@ -24,14 +24,14 @@ const ModalMinuta: React.FC = () => {
               <CircleIcon>
                 <FiAlertCircle />
               </CircleIcon>
-              <p>Por favor leia o documento com <b> atenção. </b></p>
+              <p>Por favor preencha os dados com  <b> atenção. </b></p>
             </li>
 
             <li>
               <CircleIcon>
                 <FaSearch />
               </CircleIcon>
-              <p>Confira todos os seus dados antes de realizar a assinatura.</p>
+              <p>Leia a minuta antes de realizar a assinatura.</p>
             </li>
             
             <li>

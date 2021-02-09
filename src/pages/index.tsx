@@ -33,6 +33,8 @@ const Home: React.FC = () => {
     </Container>
     
     {loading && <Loading />}
+
+   
     </>
   )
 }
