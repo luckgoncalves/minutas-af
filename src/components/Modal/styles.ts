@@ -3,6 +3,10 @@ import styled from 'styled-components';
 import { Modal } from 'reactstrap';
 
 export const Container = styled(Modal)`
+    margin: auto;
+    width: 640px;
+    max-width: 100%;
+    
     .modal-content {
 
       .modal-header {
@@ -11,6 +15,8 @@ export const Container = styled(Modal)`
 
       .modal-footer {
         border-top: none;
+        margin-bottom: 36px;
+        padding-bottom: 0;
       }
     }
 `;
@@ -22,9 +28,14 @@ export const List = styled.ul`
     display: flex;
     align-items: center;
 
+    &:nth-child(2) {
+      margin: 42px 0;
+    }
+
     p {
       margin: 0;
       font-size: 16px;
+      color: #5d6162;
     }
   }
 `;

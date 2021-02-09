@@ -89,14 +89,14 @@ const StepBar: React.FC = () => {
       <Steps>
         <Step onClick={() => setActive(1)}>
             <Badge active={active >= 1 ? 'true' : 'false'}> {active > 1 ? <FaCheck />  : 1 }</Badge>
-            <span>Selecionar motivo</span>
+            <span>Informar os dados</span>
         </Step>
 
         <Step onClick={() => setActive(2)}>
 
           <Separator />
           <Badge active={active >= 2 ? 'true' : 'false'}>{active > 2 ? <FaCheck />  : 2 }</Badge>
-          <span>Informar dados</span>
+          <span>Ver minuta</span>
 
           <Separator />
         </Step>

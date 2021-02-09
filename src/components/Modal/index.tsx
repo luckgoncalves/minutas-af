@@ -10,13 +10,14 @@ import { Container, List, CircleIcon } from './styles'
 
 const ModalMinuta: React.FC = () => {
  
-  const [ modal, setModal ] = useState(false);
+  const [ modal, setModal ] = useState(true);
 
   const toggle = () => setModal(!modal);
 
   return (
       <Container className="modal-lg" isOpen={modal} toggle={toggle}>
         <ModalHeader toggle={toggle} />
+        
         <ModalBody className="px-5">
           <List>
             <li>
@@ -25,21 +26,23 @@ const ModalMinuta: React.FC = () => {
               </CircleIcon>
               <p>Por favor leia o documento com <b> atenção. </b></p>
             </li>
-            <li className="my-5">
+
+            <li>
               <CircleIcon>
                 <FaSearch />
               </CircleIcon>
               <p>Confira todos os seus dados antes de realizar a assinatura.</p>
             </li>
+            
             <li>
               <CircleIcon>
                 <BiDownload />
               </CircleIcon>
-              <p>Ao final da assinatura é possível realizar download de uma cópia
-do documento original.</p>
+              <p>Ao final da assinatura é possível realizar download de uma cópia do documento original.</p>
             </li>
           </List>
         </ModalBody>
+
         <ModalFooter className="d-flex justify-content-center align-items-center">
           <Button
             outlined={false}

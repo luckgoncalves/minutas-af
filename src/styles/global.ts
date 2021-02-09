@@ -12,4 +12,8 @@ export default createGlobalStyle`
     color: ${props => props.theme.colors.text};
     font: 400 16px Rotobo, sans-serif;
   }
+
+  .modal {
+    display: flex !important;
+  }
 `;
