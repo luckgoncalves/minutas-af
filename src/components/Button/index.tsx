@@ -1,19 +1,22 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 import { Container } from './style';
 
 interface GreetingSettings {
-  text: string;
+  children: ReactNode;
   loading: boolean;
   outlined: boolean;
   onClick: () => void;
 }
 
 
-const Button: React.FC<GreetingSettings> = ({text, loading, outlined, onClick}) => {
+const Button: React.FC<GreetingSettings> = ({onClick, loading, outlined, children}) => {
   return (
-    <Container outlined={`${outlined}`} onClick={onClick}>
-      {text}
+    <Container
+      onClick={onClick} 
+      outlined={`${outlined}`}
+    >
+      {children}
     </Container>
   );
 }

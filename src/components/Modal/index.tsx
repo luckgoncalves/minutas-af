@@ -47,9 +47,10 @@ const ModalMinuta: React.FC = () => {
           <Button
             outlined={false}
             onClick={toggle}
-            text={'Ok, entendi'}
             loading={false}
-          />
+          >
+            Ok, entendi
+          </Button>
         </ModalFooter>
       </Container>
   );

@@ -1,5 +1,7 @@
-import React, { useState, useContext }  from 'react';
+import React, { useState, useEffect, useContext }  from 'react';
 import { FaCheck } from 'react-icons/fa';
+import axios from 'axios'
+
 import StepBody from '../StepBody';
 
 import Button from '../Button'
@@ -13,14 +15,26 @@ const StepBar: React.FC = () => {
 
   const { loading, setLoading } = useContext(AuthContext)
 
-  const [ active, setActive ] = useState(1)
+  const [ active, setActive ] = useState(2)
 
 
   const Body = (payment) => {
     payment = 'Depósito na Conta do Advogado';
 
+    function onSubmit(e) {
+      e.preventDefault();
+
+      axios.post('/api/clicksign/createdoc', {
+        name: 'testte'
+      })
+      .then(console.log)
+      .catch(error => console.log(error.response.data.error))
+
+      // setLoading(!loading)
+    }
+
     return (
-      <Form>
+      <Form onSubmit={onSubmit}>
         <span>Pedimos, por gentileza, preencher as informações para o escritório confeccionar a minuta. No caso o pagamento dar-se-á através de depósito em conta corrente da PARTE AUTORA. </span>
       
        {typeForm()
@@ -39,22 +53,28 @@ const StepBar: React.FC = () => {
             onClick={() => setLoading(!loading)} 
             loading={loading} 
             outlined={true} 
-            text="Cancelar"/>
+          >
+            Cancelar
+          </Button>
             
           <Button 
+            onClick={() => ''}
             outlined={false}
-            onClick={() => setLoading(!loading)} 
             loading={loading} 
-            text="Gerar minuta" />
+          >
+            Gerar minuta
+          </Button>
         </GroupButtons>
       </Form>
     )
   }
 
   const BodyTwo = () => {
+    // console.log(response)
     return (
       <>
       <h1>Teste2</h1>
+    
       <button>Avançar</button>
       </>
     )

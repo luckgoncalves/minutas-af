@@ -1,12 +1,11 @@
-import React, { useState, useContext } from 'react';
-
+import React, { useState, useContext, useEffect } from 'react';
+import axios from 'axios';
 
 import Head from 'next/head';
 
 import LogoAf from '../assets/img/logo-af.svg'
 
 import StepBar from '../components/StepBar'
-// import Button from '../components/Button'
 import Loading from '../components/Loading'
 import ModaMinuta from '../components/Modal'
 
@@ -18,23 +17,26 @@ import { AuthContext } from '../providers/auth';
 const Home: React.FC = () => {
   const {loading} = useContext(AuthContext)
 
+  useEffect(() => {
+    axios.get('/api/clicksign/alldocuments')
+    .then(response => response)
+  },[])
+
   return (
     <>
-    <Container>
-      <Head>
-        <title>Minutas</title>
-      </Head>
+      <Container>
+        <Head>
+          <title>Minutas</title>
+        </Head>
 
-      <img src={LogoAf} alt="Acordo Fechado" />
+        <img src={LogoAf} alt="Acordo Fechado" />
+        
+        <StepBar />
+
+        <ModaMinuta />
+      </Container>
       
-      <StepBar />
-
-      <ModaMinuta />
-    </Container>
-    
-    {loading && <Loading />}
-
-   
+      {loading && <Loading />}
     </>
   )
 }
