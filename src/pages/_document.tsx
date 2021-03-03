@@ -49,7 +49,7 @@ export default class MyDocument extends Document {
             rel="stylesheet"
           />
           <link rel="icon" href="https://www.acordofechado.com.br/wp-content/uploads/2019/04/favico.png" />
-          <script src="https://raw.githubusercontent.com/clicksign/embedded/main/build/embedded.js"></script>
+          {/* <script src="https://raw.githubusercontent.com/clicksign/embedded/main/build/embedded.js"></script> */}
         
         </Head>
         <body>
