@@ -58,8 +58,6 @@ export default class MyDocument extends Document {
           <input id='request_signature_key' />
           <input type='button' value='Load' onClick={() => run()}/>
           <div id='container' style={{height: '600px'}}></div>
-          <div id='container'></div>
-       
         </body>
       </Html>
     )
