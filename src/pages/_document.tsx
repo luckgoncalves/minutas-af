@@ -8,7 +8,7 @@ import Document, {
   NextScript
 } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
-import ScriptClicksign from '../components/scriptclicksign';
+import { run } from '../components/scriptclicksign';
 
 export default class MyDocument extends Document {
   static async getInitialProps(
@@ -55,8 +55,11 @@ export default class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          <input id='request_signature_key' />
+          <input type='button' value='Load' onClick={() => run()}/>
+          <div id='container' style={{height: '600px'}}></div>
           <div id='container'></div>
-          {ScriptClicksign()}
+       
         </body>
       </Html>
     )
