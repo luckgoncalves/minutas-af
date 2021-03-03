@@ -26,7 +26,7 @@ const Home: React.FC = () => {
     <>
       <Container>
         <Head>
-          <title>Minutas</title>
+          <title>Minutass</title>
         </Head>
 
         <img src={LogoAf} alt="Acordo Fechado" />
