@@ -8,6 +8,7 @@ import Document, {
   NextScript
 } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
+import ScriptClicksign from '../components/scriptclicksign';
 
 export default class MyDocument extends Document {
   static async getInitialProps(
@@ -47,12 +48,15 @@ export default class MyDocument extends Document {
             href="https://fonts.googleapis.com/css?family=Roboto:400,500,700"
             rel="stylesheet"
           />
-
           <link rel="icon" href="https://www.acordofechado.com.br/wp-content/uploads/2019/04/favico.png" />
+          <script src="https://raw.githubusercontent.com/clicksign/embedded/main/build/embedded.js"></script>
+        
         </Head>
         <body>
           <Main />
           <NextScript />
+          <div id='container'></div>
+          {ScriptClicksign()}
         </body>
       </Html>
     )
