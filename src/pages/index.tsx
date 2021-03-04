@@ -18,11 +18,13 @@ const Home: React.FC = () => {
   const router = useRouter()
 
   let { template } = router.query 
-
+  console.log(template)
   useEffect(() => {
-    axios.post('/api/clicksign/document', {template: template})
-    .then(response => console.log(response))
-  },[])
+    if(template) {
+      axios.post('/api/clicksign/document', {template})
+      .then(response => console.log(response))
+    }
+  },[template])
 
   return (
     <>

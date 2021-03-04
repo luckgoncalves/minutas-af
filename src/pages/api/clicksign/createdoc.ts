@@ -4,10 +4,10 @@ import { clicksign } from '../../../services/clicksign';
 export default async (request: Request, response: Response ) => {
   const body = {
     "document":{
-      "path": "/modelo.docx",
+      "path": "/modelohje.docx",
       "template":{
         "data": {
-          "nome": "Lucas GOnçalvesss"
+          "nome": "Lucas GOnçalvesss Leite"
         }
       }
     }

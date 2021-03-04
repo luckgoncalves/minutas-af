@@ -15,7 +15,7 @@ const StepBar: React.FC = () => {
 
   const { loading, setLoading } = useContext(AuthContext)
 
-  const [ active, setActive ] = useState(1)
+  const [ active, setActive ] = useState(2)
 
 
   const Body = (payment) => {
@@ -72,11 +72,10 @@ const StepBar: React.FC = () => {
   const BodyTwo = () => {
     // console.log(response)
     return (
-      <>
-      <h1>Teste2</h1>
-    
-      <button>Avançar</button>
-      </>
+      <div className="d-flex flex-column w-100" style={{height: '500px'}}>
+        <iframe style={{width: '100%', height: '100%'}} src="https://sandbox.clicksign.com/sign/5482e8b3-ac51-4f7a-888c-2029e35894f8" frameborder="0"></iframe>
+        <button>Avançar</button>
+      </div>
     )
   }
 
