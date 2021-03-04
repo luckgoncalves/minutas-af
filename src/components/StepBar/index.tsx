@@ -15,7 +15,7 @@ const StepBar: React.FC = () => {
 
   const { loading, setLoading } = useContext(AuthContext)
 
-  const [ active, setActive ] = useState(2)
+  const [ active, setActive ] = useState(1)
 
 
   const Body = (payment) => {

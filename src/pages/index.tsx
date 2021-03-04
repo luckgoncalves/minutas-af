@@ -1,39 +1,39 @@
 import React, { useState, useContext, useEffect } from 'react';
-import axios from 'axios';
-
 import Head from 'next/head';
+import { useRouter } from 'next/router';
+import axios from 'axios';
 
 import LogoAf from '../assets/img/logo-af.svg'
 
 import StepBar from '../components/StepBar'
 import Loading from '../components/Loading'
-import ModaMinuta from '../components/Modal'
+import ModalMinuta from '../components/Modal'
 
 import { Container } from '../styles/pages/Home'
 import { AuthContext } from '../providers/auth';
 
 
-
 const Home: React.FC = () => {
   const {loading} = useContext(AuthContext)
+  const router = useRouter()
+
+  let { template } = router.query 
 
   useEffect(() => {
-    axios.get('/api/clicksign/alldocuments')
-    .then(response => response)
+    axios.post('/api/clicksign/document', {template: template})
+    .then(response => console.log(response))
   },[])
 
   return (
     <>
+      <Head>
+        <title>Minutas</title>
+      </Head>
       <Container>
-        <Head>
-          <title>Minutass</title>
-        </Head>
-
         <img src={LogoAf} alt="Acordo Fechado" />
-        
         <StepBar />
 
-        <ModaMinuta />
+        <ModalMinuta />
       </Container>
       
       {loading && <Loading />}

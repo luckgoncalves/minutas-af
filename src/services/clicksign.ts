@@ -22,5 +22,14 @@ export const clicksign = {
     } catch (error) {
       // console.log(error)
     }
+  },
+
+  findDocument: async function (payload) {
+    console.log(payload)
+    try {
+      return await api.get(`/documents/${payload}?access_token=${access_token}`)
+    } catch (error) {
+      
+    }
   }
 }
