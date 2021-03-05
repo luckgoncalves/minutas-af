@@ -14,6 +14,5 @@ export default async (request: Request, response: Response ) => {
   }
 
   const createdDoc = await clicksign.createDoc({body})
-  console.log(createdDoc)
   return response.status(createdDoc.status).json({...createdDoc.data})
 }

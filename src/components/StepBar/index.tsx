@@ -11,6 +11,7 @@ import { AuthContext } from '../../providers/auth';
 
 import { typeForm, fields } from './actions';
 
+
 const StepBar: React.FC = () => {
 
   const { loading, setLoading } = useContext(AuthContext)
@@ -70,11 +71,15 @@ const StepBar: React.FC = () => {
   }
 
   const BodyTwo = () => {
-    // console.log(response)
+
     return (
       <div className="d-flex flex-column w-100" style={{height: '500px'}}>
-        <iframe style={{width: '100%', height: '100%'}} src="https://sandbox.clicksign.com/sign/5482e8b3-ac51-4f7a-888c-2029e35894f8" frameborder="0"></iframe>
+        <input id='request_signature_key' />
+         <input type='button' value='Load' id="run-click"/>
+        <div id='container' style={{height: '600px'}}></div>
+        {/* <iframe style={{width: '100%', height: '100%'}} src="https://sandbox.clicksign.com/sign/5482e8b3-ac51-4f7a-888c-2029e35894f8" frameborder="0"></iframe> */}
         <button>Avançar</button>
+        {/* {getKey()} */}
       </div>
     )
   }

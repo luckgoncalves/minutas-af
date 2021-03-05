@@ -12,13 +12,12 @@ import ModalMinuta from '../components/Modal'
 import { Container } from '../styles/pages/Home'
 import { AuthContext } from '../providers/auth';
 
-
 const Home: React.FC = () => {
   const {loading} = useContext(AuthContext)
   const router = useRouter()
 
   let { template } = router.query 
-  console.log(template)
+  
   useEffect(() => {
     if(template) {
       axios.post('/api/clicksign/document', {template})
@@ -32,6 +31,7 @@ const Home: React.FC = () => {
         <title>Minutas</title>
       </Head>
       <Container>
+       
         <img src={LogoAf} alt="Acordo Fechado" />
         <StepBar />
 
@@ -39,6 +39,7 @@ const Home: React.FC = () => {
       </Container>
       
       {loading && <Loading />}
+    
     </>
   )
 }
