@@ -35,7 +35,7 @@ const Home: React.FC = () => {
         <img src={LogoAf} alt="Acordo Fechado" />
         <StepBar />
 
-        <ModalMinuta />
+        {/* <ModalMinuta /> */}
       </Container>
       
       {loading && <Loading />}

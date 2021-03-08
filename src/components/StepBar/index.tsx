@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext }  from 'react';
+import React, { useState, useContext }  from 'react';
 import { FaCheck } from 'react-icons/fa';
 import axios from 'axios'
 
@@ -11,34 +11,49 @@ import { AuthContext } from '../../providers/auth';
 
 import { typeForm, fields } from './actions';
 
+interface FormProps {
+  inputName: string,
+  inputValue: string
+}
 
 const StepBar: React.FC = () => {
 
-  const { loading, setLoading } = useContext(AuthContext)
+  const { loading, handleLoading } = useContext(AuthContext)
 
   const [ active, setActive ] = useState(2)
 
 
   const Body = (payment) => {
+    const [ form, setForm ] = useState<FormProps>();
+
     payment = 'Depósito na Conta do Advogado';
 
     function onSubmit(e) {
       e.preventDefault();
-
       axios.post('/api/clicksign/createdoc', {
-        name: 'testte'
+        "document":{
+          "path": "/minuta padrão.docx",
+          "template":{
+            "data": {
+              ...form
+            }
+          }
+        }
       })
       .then(console.log)
       .catch(error => console.log(error.response.data.error))
+    }
 
-      // setLoading(!loading)
+    const handleForm = (inputName: string, inputValue: string) => {
+      setForm({...form, [inputName]: inputValue})
     }
 
     return (
       <Form onSubmit={onSubmit}>
-        <span>Pedimos, por gentileza, preencher as informações para o escritório confeccionar a minuta. No caso o pagamento dar-se-á através de depósito em conta corrente da PARTE AUTORA. </span>
-      
-       {typeForm()
+        <span>Pedimos, por gentileza, preencher as informações para o escritório confeccionar a minuta. 
+          No caso o pagamento dar-se-á através de depósito em conta corrente da PARTE AUTORA. </span>
+
+       {typeForm(handleForm)
           .filter( form => form.payment.toLowerCase() === payment.toLowerCase() )
           .map( ({ inputs } ) => 
             inputs.map( input => 
@@ -51,7 +66,7 @@ const StepBar: React.FC = () => {
 
         <GroupButtons>
           <Button 
-            onClick={() => setLoading(!loading)} 
+            onClick={() => handleLoading(!loading)} 
             loading={loading} 
             outlined={true} 
           >
@@ -76,15 +91,14 @@ const StepBar: React.FC = () => {
       <div className="d-flex flex-column w-100" style={{height: '500px'}}>
         <input id='request_signature_key' />
          <input type='button' value='Load' id="run-click"/>
-        <div id='container' style={{height: '600px'}}></div>
-        {/* <iframe style={{width: '100%', height: '100%'}} src="https://sandbox.clicksign.com/sign/5482e8b3-ac51-4f7a-888c-2029e35894f8" frameborder="0"></iframe> */}
+        <div id='container' style={{height: '600px', overflow: 'auto'}}></div>
+        
         <button>Avançar</button>
-        {/* {getKey()} */}
       </div>
     )
   }
 
-  const BodyThree   = () => {
+  const BodyThree = () => {
     return (
       <>
       <h1>Teste 3</h1>
@@ -97,21 +111,27 @@ const StepBar: React.FC = () => {
     <>
       <Steps>
         <Step onClick={() => setActive(1)}>
-            <Badge active={active >= 1 ? 'true' : 'false'}> {active > 1 ? <FaCheck />  : 1 }</Badge>
+            <Badge active={active >= 1 ? 'true' : 'false'}> 
+              {active > 1 ? <FaCheck />  : 1 }
+            </Badge>
             <span>Informar os dados</span>
         </Step>
 
         <Step onClick={() => setActive(2)}>
 
           <Separator />
-          <Badge active={active >= 2 ? 'true' : 'false'}>{active > 2 ? <FaCheck />  : 2 }</Badge>
+          <Badge active={active >= 2 ? 'true' : 'false'}>
+            {active > 2 ? <FaCheck />  : 2 }
+          </Badge>
           <span>Ver minuta</span>
 
           <Separator />
         </Step>
          
         <Step onClick={() => setActive(3)}>
-          <Badge active={active >= 3 ? 'true' : 'false'}>{active > 3 ? <FaCheck />  : 3 }</Badge>
+          <Badge active={active >= 3 ? 'true' : 'false'}>
+            {active > 3 ? <FaCheck />  : 3 }
+          </Badge>
           <span>Finalizar</span>
         </Step>
       </Steps>
