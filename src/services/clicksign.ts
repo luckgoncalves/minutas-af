@@ -6,7 +6,7 @@ export const clicksign = {
     let key_template = '33b6aff0-0502-454e-9bbb-3610e66401e8';
 
     try {
-    return  await api.post(`/templates/${key_template}/documents?access_token=${access_token}`, {
+      return  await api.post(`/templates/${key_template}/documents?access_token=${access_token}`, {
         ...body
       })
     } catch (error) {
@@ -17,19 +17,36 @@ export const clicksign = {
   allDocuments: async function (payload) {
     try {
       return await api.get(`/documents?access_token=${access_token}`)
-      // .then(res => console.log(res))
-      // .catch()
     } catch (error) {
-      // console.log(error)
+      return error.response
     }
   },
 
   findDocument: async function (payload) {
-    console.log(payload)
     try {
       return await api.get(`/documents/${payload}?access_token=${access_token}`)
     } catch (error) {
-      
+      return error.response.data
+    }
+  },
+
+  createSignatario: async function({body}) {
+    try {
+      return await api.post(`/signers?access_token=${access_token}`, {
+        ...body
+      })
+    } catch (error) {
+      return error.response.data
+    }
+  },
+
+  adcSignersDocuments: async function ({body}) {
+    try {
+      return await api.post(`/lists?access_token=${access_token}`, {
+        ...body
+      })
+    } catch (error) {
+      return error.response.data
     }
   }
 }

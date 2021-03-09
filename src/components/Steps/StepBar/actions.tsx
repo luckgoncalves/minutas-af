@@ -1,4 +1,4 @@
-export const typeForm = (handleForm: any) => {
+export const typeForm = (listBancos: any, handleForm: any) => {
   
   const paymentType = [
     { payment: 'Depósito na Conta do Autor',
@@ -19,7 +19,8 @@ export const typeForm = (handleForm: any) => {
           id: 'bancoBeneficiario', 
           name: 'bancoBeneficiario', 
           disabled: false,
-          onChange: handleForm
+          onChange: handleForm,
+          listBancos: listBancos
         },
         { 
           id: 'agenciaBeneficiario', 
@@ -54,7 +55,8 @@ export const typeForm = (handleForm: any) => {
           id: 'bancoBeneficiario', 
           name: 'bancoBeneficiario', 
           disabled: false,
-          onChange: handleForm
+          onChange: handleForm,
+          listBancos: listBancos
         },
         { 
           id: 'agenciaBeneficiario', 
@@ -124,17 +126,25 @@ export const fields = {
     )
   },
 
-  bancoBeneficiario: function({id, name, onChange, disabled}){
+  bancoBeneficiario: function({id, name, onChange, disabled, listBancos}){
     return (
       <fieldset id="banco-beneficiario">
         <label htmlFor={id}>Qual o banco para depósito?</label>
-        <select
+        <input
           onChange={e => onChange(name, e.target.value)} 
           name={name} 
           disabled={disabled} 
-          id={id}>
-          <option>Selecionar banco da parte autora</option>
-        </select>
+          list={id} 
+          placeholder="Selecionar banco da parte autora"
+        />
+        <datalist id={id}>
+          {listBancos
+            .sort((a:any, b:any) => a.banco.localeCompare(b.banco))
+            .map( ({banco}, index) => (
+              <option key={index} value={banco}>{banco}</option>
+            )
+          )}
+        </datalist>
       </fieldset>
     )
   },

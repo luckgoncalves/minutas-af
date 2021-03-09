@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { clicksign } from '../../../services/clicksign';
+import { clicksign } from '../../../../services/clicksign';
 
 export default async (request: Request, response: Response ) => {
 

@@ -1,13 +1,13 @@
-import React, { useState, useContext }  from 'react';
+import React, { useState, useContext, useEffect, useCallback }  from 'react';
 import { FaCheck } from 'react-icons/fa';
 import axios from 'axios'
 
 import StepBody from '../StepBody';
 
-import Button from '../Button'
+import Button from '../../Button'
 
 import { Steps, Badge, Step, Separator, Form, GroupButtons } from './styles';
-import { AuthContext } from '../../providers/auth';
+import { AuthContext } from '../../../providers/auth';
 
 import { typeForm, fields } from './actions';
 
@@ -19,8 +19,10 @@ interface FormProps {
 const StepBar: React.FC = () => {
 
   const { loading, handleLoading } = useContext(AuthContext)
-
+  
+  const [ listBancos, setListBancos ] = useState([]);
   const [ active, setActive ] = useState(2)
+  const [ signatario, setSignatario ] = useState()
 
 
   const Body = (payment) => {
@@ -28,9 +30,42 @@ const StepBar: React.FC = () => {
 
     payment = 'Depósito na Conta do Advogado';
 
-    function onSubmit(e) {
-      e.preventDefault();
-      axios.post('/api/clicksign/createdoc', {
+    useEffect(() => {
+
+      listBancos.length === 0 &&
+        axios.get('/bancos.json')
+        .then(response => setListBancos(response.data))
+    }, [listBancos]);
+
+    //Cria um signatario;
+    function createSignatario () {
+      axios.post('api/clicksign/signers/createSignatario', {
+        "signer": {
+          "email": "lucasleitegoncalves@gmail.com",
+          "phone_number": "41997669242",
+          "auths": [
+            "email"
+          ],
+          "name": "Lucas Gonçalves",
+          "documentation": "085.921.769-80",
+          "birthday": "1994-06-29",
+          "has_documentation": true,
+          "selfie_enabled": true,
+          "handwritten_enabled": true,
+          "official_document_enabled": true
+        }
+      })
+      .then(async response => {
+        setSignatario(response.data.signer)
+
+        await createDocument(response.data.signer);
+      
+      })
+    }
+
+    //Cria o documento com os dados do formulário;
+    function createDocument(signer) {
+      axios.post('/api/clicksign/documents/createdoc', {
         "document":{
           "path": "/minuta padrão.docx",
           "template":{
@@ -40,8 +75,31 @@ const StepBar: React.FC = () => {
           }
         }
       })
+      .then(async response => {
+        await addSignerDocument(signer, response.data.document)
+      })
+      .catch(error => console.log(error.response.data.error))
+    }
+
+    //Adiciona o signatario ao documento;
+    function addSignerDocument(signer, document) {
+      axios.post('/api/clicksign/signers/signersDocuments', {
+        "list": {
+          "document_key": document.key,
+          "signer_key": signer.key,
+          "sign_as": "sign",
+          "message": "Prezado João,\nPor favor assine o documento.\n\nQualquer dúvida estou à disposição.\n\nAtenciosamente,\nGuilherme Alvez"
+        }
+      })
       .then(console.log)
       .catch(error => console.log(error.response.data.error))
+    }
+
+    async function onSubmit(e) {
+      e.preventDefault();
+          
+      await createSignatario();
+     
     }
 
     const handleForm = (inputName: string, inputValue: string) => {
@@ -53,7 +111,7 @@ const StepBar: React.FC = () => {
         <span>Pedimos, por gentileza, preencher as informações para o escritório confeccionar a minuta. 
           No caso o pagamento dar-se-á através de depósito em conta corrente da PARTE AUTORA. </span>
 
-       {typeForm(handleForm)
+       {typeForm(listBancos, handleForm)
           .filter( form => form.payment.toLowerCase() === payment.toLowerCase() )
           .map( ({ inputs } ) => 
             inputs.map( input => 

@@ -1,11 +1,11 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 
 import LogoAf from '../assets/img/logo-af.svg'
 
-import StepBar from '../components/StepBar'
+import StepBar from '../components/Steps/StepBar'
 import Loading from '../components/Loading'
 import ModalMinuta from '../components/Modal'
 
@@ -20,7 +20,7 @@ const Home: React.FC = () => {
   
   useEffect(() => {
     if(template) {
-      axios.post('/api/clicksign/document', {template})
+      axios.post('/api/clicksign/documents/document', {template})
       .then(response => console.log(response))
     }
   },[template])
