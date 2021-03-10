@@ -21,7 +21,7 @@ const StepBar: React.FC = () => {
   const { loading, handleLoading } = useContext(AuthContext)
   
   const [ listBancos, setListBancos ] = useState([]);
-  const [ active, setActive ] = useState(2)
+  const [ active, setActive ] = useState(1)
   const [ signatario, setSignatario ] = useState()
 
 

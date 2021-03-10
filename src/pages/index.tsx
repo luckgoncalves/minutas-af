@@ -8,7 +8,7 @@ import LogoAf from '../assets/img/logo-af.svg'
 import StepBar from '../components/Steps/StepBar'
 import Loading from '../components/Loading'
 import ModalMinuta from '../components/Modal'
-
+import ModalCreateSigner from '../components/ModalCreateSigners'
 import { Container } from '../styles/pages/Home'
 import { AuthContext } from '../providers/auth';
 
@@ -36,6 +36,7 @@ const Home: React.FC = () => {
         <StepBar />
 
         {/* <ModalMinuta /> */}
+        <ModalCreateSigner />
       </Container>
       
       {loading && <Loading />}

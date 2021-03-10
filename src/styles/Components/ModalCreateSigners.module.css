@@ -1,0 +1,32 @@
+.modalContainer {
+  width: 900px;
+  max-width: 100%;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+
+}
+
+.fieldGroup > label {
+  color: #222222;
+  font-size: 20px;
+}
+
+.fieldGroup > input {
+ 
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 2px;
+
+  background: none;
+  outline: none;
+
+  color: #404040;
+
+  font-size: 14px;
+
+  padding-bottom: 11px;
+}
